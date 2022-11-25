@@ -1,0 +1,68 @@
+<body>
+  <div
+    class="chart-container"
+    style="position: relative; height: 95vh; width: 95vw"
+  >
+    <canvas id="chart1"></canvas>
+  </div>
+</body>
+<script src="chart.js"></script>
+<script>
+  let delayed
+  new Chart(document.getElementById('chart1'), {
+    type: 'bar',
+    data: {
+      labels: ['Meta', 'Amazon', 'Twitter', 'Crypto.com', 'Stripe', 'Lyft'],
+      datasets: [
+        {
+          data: [11000, 10000, 4700, 2000, 1000, 700],
+          backgroundColor: [
+            '#4185F3',
+            '#FABC00',
+            '#48BFC7',
+            '#18446F',
+            '#674EA6',
+            '#D4A4BC'
+          ],
+          borderWidth: 2,
+          borderRadius: 5,
+          borderSkipped: false
+        }
+      ]
+    },
+
+    options: {
+      plugins: {
+        legend: {
+          display: false //This will do the task
+        }
+      },
+      animation: {
+        onComplete: () => {
+          delayed = true
+        },
+        delay: context => {
+          let delay = 0
+          if (
+            context.type === 'data' &&
+            context.mode === 'default' &&
+            !delayed
+          ) {
+            delay = context.dataIndex * 100 + context.datasetIndex * 20
+          }
+          return delay
+        }
+      },
+      scales: {
+        x: {
+          grid: {
+            display: false
+          }
+        },
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  })
+</script>
