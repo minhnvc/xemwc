@@ -8,6 +8,9 @@
 </body>
 <script src="chart.js"></script>
 <script>
+  function getRandomArbitrary(min, max) {
+    return Math.random() * (max - min) + min
+  }
   let delayed
   new Chart(document.getElementById('chart1'), {
     type: 'bar',
@@ -24,7 +27,7 @@
             '#674EA6',
             '#D4A4BC'
           ],
-          borderWidth: 2,
+          borderWidth: 0,
           borderRadius: 5,
           borderSkipped: false
         }
@@ -48,7 +51,9 @@
             context.mode === 'default' &&
             !delayed
           ) {
-            delay = context.dataIndex * 100 + context.datasetIndex * 20
+            delay =
+              context.dataIndex * getRandomArbitrary(50, 100) +
+              context.datasetIndex * getRandomArbitrary(50, 100)
           }
           return delay
         }
