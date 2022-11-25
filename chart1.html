@@ -8,29 +8,65 @@
 </body>
 <script src="chart.js"></script>
 <script>
+  let delayed
   new Chart(document.getElementById('chart1'), {
     type: 'bar',
-    animations: {
-      tension: {
-        duration: 1000,
-        easing: 'linear',
-        from: 1,
-        to: 0,
-        loop: true
-      }
-    },
     data: {
-      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+      labels: [
+        '09',
+        '10',
+        '11',
+        '12',
+        '13',
+        '14',
+        '15',
+        '16',
+        '17',
+        '18',
+        '19',
+        '20',
+        '21'
+      ],
       datasets: [
         {
-          label: '# of Votes',
-          data: [12, 19, 3, 5, 2, 3],
-          borderWidth: 1
+          data: [
+            1.25, 1.41, 1.49, 1.51, 1.7, 1.8, 1.9, 2.1, 2.2, 2.25, 2.3, 2.1, 2.7
+          ],
+          borderWidth: 2,
+          borderRadius: 5,
+          borderSkipped: false
         }
       ]
     },
+
     options: {
+      plugins: {
+        legend: {
+          display: false //This will do the task
+        }
+      },
+      animation: {
+        onComplete: () => {
+          delayed = true
+        },
+        delay: context => {
+          let delay = 0
+          if (
+            context.type === 'data' &&
+            context.mode === 'default' &&
+            !delayed
+          ) {
+            delay = context.dataIndex * 100 + context.datasetIndex * 20
+          }
+          return delay
+        }
+      },
       scales: {
+        x: {
+          grid: {
+            display: false
+          }
+        },
         y: {
           beginAtZero: true
         }
