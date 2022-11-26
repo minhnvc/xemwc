@@ -1,7 +1,7 @@
 <body>
   <div
     class="chart-container"
-    style="position: relative; height: 95vh; width: 95vw"
+    style="position: relative; height: 100vh; width: 100vw"
   >
     <canvas id="chart1"></canvas>
   </div>
@@ -14,6 +14,7 @@
   let delayed
   new Chart(document.getElementById('chart1'), {
     type: 'polarArea',
+
     data: {
       labels: ['All Industries', 'Tech Industry', 'Zalo'],
       datasets: [
