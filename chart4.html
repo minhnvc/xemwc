@@ -1,0 +1,64 @@
+<body>
+  <div
+    class="chart-container"
+    style="position: relative; height: 95vh; width: 95vw"
+  >
+    <canvas id="chart1"></canvas>
+  </div>
+</body>
+<script src="chart.js"></script>
+<script>
+  function getRandomArbitrary(min, max) {
+    return Math.random() * (max - min) + min
+  }
+  let delayed
+  new Chart(document.getElementById('chart1'), {
+    type: 'polarArea',
+    data: {
+      labels: ['All Industries', 'Tech Industry', 'Zalo'],
+      datasets: [
+        {
+          data: [10.6, 12.9, 21],
+          backgroundColor: [
+            'rgb(255, 205, 86, 0.7)',
+            'rgb(75, 192, 192, 0.7)',
+            'rgb(54, 162, 235, 0.7)'
+          ],
+          borderWidth: 0,
+          borderSkipped: true
+        }
+      ]
+    },
+    options: {
+      scales: {
+        r: {
+          max: 25,
+          pointLabels: {
+            color: [
+              'rgb(255, 205, 86)',
+              'rgb(75, 192, 192)',
+              'rgb(54, 162, 235)'
+            ],
+            display: true,
+            centerPointLabels: true,
+            font: {
+              size: 18,
+              weight: 'bold'
+            }
+          },
+          ticks: {
+            // Include a dollar sign in the ticks
+            callback: function (value, index, ticks) {
+              return value + '%'
+            }
+          }
+        }
+      },
+      plugins: {
+        legend: {
+          display: false
+        }
+      }
+    }
+  })
+</script>
