@@ -50,6 +50,10 @@
           },
           beginAtZero: true,
           ticks: {
+            // Include a dollar sign in the ticks
+            callback: function (value, index, ticks) {
+              return value + '%'
+            },
             font: {
               size: 16,
               weight: 'bold'
