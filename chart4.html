@@ -13,7 +13,7 @@
   }
   let delayed
   new Chart(document.getElementById('chart1'), {
-    type: 'polarArea',
+    type: 'bar',
 
     data: {
       labels: ['All Industries', 'Tech Industry', 'Zalo'],
@@ -26,31 +26,33 @@
             'rgb(54, 162, 235, 0.7)'
           ],
           borderWidth: 0,
-          borderSkipped: true
+          borderRadius: 5,
+          borderSkipped: false
         }
       ]
     },
     options: {
       scales: {
-        r: {
-          max: 25,
-          pointLabels: {
-            color: [
-              'rgb(255, 205, 86)',
-              'rgb(75, 192, 192)',
-              'rgb(54, 162, 235)'
-            ],
-            display: true,
-            centerPointLabels: true,
-            font: {
-              size: 18,
-              weight: 'bold'
-            }
+        x: {
+          grid: {
+            display: false
           },
           ticks: {
-            // Include a dollar sign in the ticks
-            callback: function (value, index, ticks) {
-              return value + '%'
+            font: {
+              size: 20,
+              weight: 'bold'
+            }
+          }
+        },
+        y: {
+          border: {
+            display: false
+          },
+          beginAtZero: true,
+          ticks: {
+            font: {
+              size: 16,
+              weight: 'bold'
             }
           }
         }
