@@ -1,0 +1,133 @@
+<body>
+  <div
+    class="chart-container"
+    style="position: relative; height: 100vh; width: 97vw"
+  >
+    <canvas id="chart1"></canvas>
+  </div>
+</body>
+<script src="chart.js"></script>
+<script>
+  function getRandomArbitrary(min, max) {
+    return Math.random() * (max - min) + min
+  }
+  let delayed
+  new Chart(document.getElementById('chart1'), {
+    type: 'bar',
+    data: {
+      labels: [
+        'Jan 2022',
+        'Feb 2022',
+        'Mar 2022',
+        'Apr 2022',
+        'May 2022',
+        'Jun 2022',
+        'Jul 2022',
+        'Aug 2022',
+        'Sep 2022',
+        'Oct 2022',
+        'Nov 2022'
+      ],
+
+      datasets: [
+        {
+          label: 'Employees Laid Off',
+          data: [
+            510, 3625, 5694, 4096, 12535, 17584, 16223, 13095, 5881, 12683,
+            45598
+          ],
+          backgroundColor: ['#FF7060'],
+          borderWidth: 0,
+          borderRadius: 5,
+          borderSkipped: false,
+          yAxisID: 'y'
+        },
+        {
+          label: 'Companies w/ Layoffs',
+          data: [4, 11, 17, 28, 76, 193, 160, 157, 93, 96, 154],
+          backgroundColor: ['#01B0FF'],
+          borderWidth: 0,
+          borderRadius: 5,
+          borderSkipped: false,
+          yAxisID: 'y1'
+        }
+      ]
+    },
+    options: {
+      plugins: {
+        legend: {
+          display: true, //This will do the task
+          labels: {
+            font: {
+              size: 16,
+              weight: 'bold'
+            }
+          }
+        }
+      },
+      animation: {
+        onComplete: () => {
+          delayed = true
+        },
+        delay: context => {
+          let delay = 0
+          if (
+            context.type === 'data' &&
+            context.mode === 'default' &&
+            !delayed
+          ) {
+            delay =
+              context.dataIndex * getRandomArbitrary(50, 100) +
+              context.datasetIndex * getRandomArbitrary(50, 100)
+          }
+          return delay
+        }
+      },
+
+      scales: {
+        x: {
+          grid: {
+            display: false
+          },
+          ticks: {
+            font: {
+              size: 16,
+              weight: 'bold'
+            }
+          }
+        },
+        y: {
+          border: {
+            display: false
+          },
+          beginAtZero: true,
+          ticks: {
+            color: '#FF7060',
+            font: {
+              size: 14,
+              weight: 'bold'
+            }
+          }
+        },
+        y1: {
+          grid: {
+            display: false
+          },
+          position: 'right',
+          border: {
+            display: false
+          },
+          beginAtZero: true,
+          max: 300,
+          ticks: {
+            color: '#01B0FF',
+            font: {
+              size: 14,
+              weight: 'bold'
+            }
+          }
+        }
+      }
+    }
+  })
+</script>
