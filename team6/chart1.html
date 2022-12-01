@@ -1,0 +1,107 @@
+<head>
+  <style>
+    html,
+    body {
+      margin: 0;
+      height: 100%;
+      overflow: hidden;
+    }
+  </style>
+</head>
+<body>
+  <div
+    class="chart-container"
+    style="position: relative; height: 100vh; width: 97vw"
+  >
+    <canvas id="chart1"></canvas>
+  </div>
+</body>
+<script src="chart.js"></script>
+<script>
+  function getRandomArbitrary(min, max) {
+    return Math.random() * (max - min) + min
+  }
+  let delayed
+  new Chart(document.getElementById('chart1'), {
+    type: 'bar',
+    data: {
+      labels: [
+        '09',
+        '10',
+        '11',
+        '12',
+        '13',
+        '14',
+        '15',
+        '16',
+        '17',
+        '18',
+        '19',
+        '20',
+        '21'
+      ],
+      datasets: [
+        {
+          data: [
+            1.25, 1.41, 1.49, 1.51, 1.7, 1.8, 1.9, 2.1, 2.2, 2.25, 2.3, 2.1, 2.7
+          ],
+          backgroundColor: ['#4185F3'],
+          borderWidth: 0,
+          borderRadius: 5,
+          borderSkipped: false
+        }
+      ]
+    },
+
+    options: {
+      plugins: {
+        legend: {
+          display: false //This will do the task
+        }
+      },
+      animation: {
+        onComplete: () => {
+          delayed = true
+        },
+        delay: context => {
+          let delay = 0
+          if (
+            context.type === 'data' &&
+            context.mode === 'default' &&
+            !delayed
+          ) {
+            delay =
+              context.dataIndex * getRandomArbitrary(50, 100) +
+              context.datasetIndex * getRandomArbitrary(50, 100)
+          }
+          return delay
+        }
+      },
+      scales: {
+        x: {
+          grid: {
+            display: false
+          },
+          ticks: {
+            font: {
+              size: 20,
+              weight: 'bold'
+            }
+          }
+        },
+        y: {
+          border: {
+            display: false
+          },
+          beginAtZero: true,
+          ticks: {
+            font: {
+              size: 16,
+              weight: 'bold'
+            }
+          }
+        }
+      }
+    }
+  })
+</script>
